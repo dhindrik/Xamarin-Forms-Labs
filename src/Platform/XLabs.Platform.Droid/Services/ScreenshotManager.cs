@@ -18,7 +18,7 @@ namespace XLabs.Platform.Services
     {
         public Activity Activity { get; set; }
 
-        public async System.Threading.Tasks.Task<byte[]> CaptureAsync()
+        public async System.Threading.Tasks.Task<Screenshot> CaptureAsync()
         {
             if (Activity == null)
             {
@@ -30,15 +30,19 @@ namespace XLabs.Platform.Services
 
             Bitmap bitmap = view.GetDrawingCache(true);
 
-            byte[] bitmapData;
+            byte[] bytes;
 
             using (var stream = new MemoryStream())
             {
-                bitmap.Compress(Bitmap.CompressFormat.Png, 0, stream);
-                bitmapData = stream.ToArray();
+                bitmap.Compress(Bitmap.CompressFormat.Jpeg, 0, stream);
+                bytes = stream.ToArray();
             }
 
-            return bitmapData;
+            return new Screenshot()
+            {
+                ContentType = "image/jpeg",
+                Filebytes = bytes
+            };
         }
     }
 }

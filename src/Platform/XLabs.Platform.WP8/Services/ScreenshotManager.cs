@@ -13,7 +13,7 @@ namespace XLabs.Platform.Services
 {
     public class ScreenshotManager : IScreenshotManager
     {
-        public async Task<byte[]> CaptureAsync()
+        public async Task<Screenshot> CaptureAsync()
         {
             var rootFrame = Application.Current.RootVisual as PhoneApplicationFrame;
 
@@ -27,7 +27,11 @@ namespace XLabs.Platform.Services
 
               var bytes = stream.ToArray();
 
-              return bytes;
+              return new Screenshot()
+              {
+                  ContentType = "image/jpeg",
+                  Filebytes = bytes
+              };
           }
         }
     }

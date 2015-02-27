@@ -10,7 +10,7 @@ namespace XLabs.Platform.Services
 {
     public class ScreenshotManager : IScreenshotManager
     {
-        public async System.Threading.Tasks.Task<byte[]> CaptureAsync()
+        public async System.Threading.Tasks.Task<Screenshot> CaptureAsync()
         {
             var view = UIApplication.SharedApplication.KeyWindow.RootViewController.View;
 
@@ -19,11 +19,16 @@ namespace XLabs.Platform.Services
             var image = UIGraphics.GetImageFromCurrentImageContext();
             UIGraphics.EndImageContext();
 
-            using (var imageData = image.AsPNG())
+            using (var imageData = image.AsJPEG())
             {
                 var bytes = new byte[imageData.Length];
                 System.Runtime.InteropServices.Marshal.Copy(imageData.Bytes, bytes, 0, Convert.ToInt32(imageData.Length));
-                return bytes;
+
+                return new Screenshot()
+                {
+                    Filebytes = bytes,
+                    ContentType = "image/jpeg"
+                };
             }
         }
     }
