@@ -4,12 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:sample="clr-namespace:XLabs.Sample"
+    xmlns:sample="clr-namespace:XLabs.Sample;assembly=XLabs.Sample"
     xmlns:wp="clr-namespace:XLabs.Sample.WP">
 
     <!--Application Resources-->
     <Application.Resources>
-        <wp:LocalizedStrings x:Key="LocalizedStrings"/>
+       
         <MediaElement x:Key="GlobalMedia"></MediaElement>
     </Application.Resources>
 
